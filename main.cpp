@@ -274,10 +274,19 @@ char encontrarLetra(int indice, vector<string> partes, int linguagem){
 
         for(int i = 0; i < 26 ; i++){
             
-            if(i+deslocamentos < 26)
-                cout << (char) ('a' + i + deslocamentos) << " (" << meu_texto[i+deslocamentos] << "%)" << "\t|\t";
-            else
-                cout << "    " << "\t|\t";
+            if(deslocamentos >= 0){
+                if(i+deslocamentos < 26)
+                    cout << (char) ('a' + i + deslocamentos) << " (" << meu_texto[i+deslocamentos] << "%)" << "\t|\t";
+                else
+                    cout << "    " << "\t|\t";
+            }
+            else{
+                if(i+deslocamentos < 0){
+                    cout << (char) ('a' + i + deslocamentos + 26) << " (" << meu_texto[i+deslocamentos+26] << "%)" << "\t|\t";
+                }
+                else
+                    cout << (char) ('a' + i + deslocamentos) << " (" << meu_texto[i+deslocamentos] << "%)" << "\t|\t";
+            }
             
             if (linguagem == 1)
                 cout << (char) ('a' + i) << " (" << portugues[i] << "%)" << "\t|\t" << endl;
@@ -295,7 +304,7 @@ char encontrarLetra(int indice, vector<string> partes, int linguagem){
         if(opcao == 1)
             deslocamentos++;
         else if(opcao == 2){
-            if(deslocamentos > 0)
+            if(deslocamentos > -25)
                 deslocamentos--;
         }
         else if(opcao == 3){
@@ -384,7 +393,7 @@ int main(void){
     for(int i = 1; i <= 26; i++)
         aux.push_back(i);
     
-    // preenche matrix de letras vigenere
+    // preenche matriz de letras vigenere
     for(unsigned int i = 0; i < aux.size(); i++){
         campo.push_back(aux);
         aux.push_back(aux[0]);
